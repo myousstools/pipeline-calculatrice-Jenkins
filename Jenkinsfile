@@ -1,12 +1,6 @@
 pipeline {
     agent none
     stages {
-		stage('Branch'){
-		agent any
-		steps {
-			sh 'echo branche main'
-			}
-		}
         stage('Build') {
             agent {
                 docker {
@@ -14,6 +8,7 @@ pipeline {
                 }
             }
             steps {
+				sh 'echo depuis branche main'
                 sh 'python3.8 -m py_compile sources/prog.py sources/calc.py'
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
             }
